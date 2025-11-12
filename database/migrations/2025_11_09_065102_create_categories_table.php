@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table): void {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->string('name');
             $table->text('description')->nullable();
+
+            // self relation (parent_id)
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
+
             $table->timestamps();
         });
     }
