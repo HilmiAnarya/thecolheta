@@ -13,7 +13,12 @@ class CorsPolicy
 
         $response->headers->set('Access-Control-Allow-Origin', 'http://localhost:5173');
         $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+        $response->headers->set(
+        'X-XSRF-TOKEN',   // <--- WAJIB
+        'X-CSRF-TOKEN',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept');
         $response->headers->set('Access-Control-Allow-Credentials', 'true');
 
         if ($request->getMethod() === 'OPTIONS') {
