@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use app\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -52,5 +53,17 @@ class ProductController extends Controller
     {
         $product->delete();
         return response()->noContent();
+    }
+
+    public function toggleStatus(Product $product)
+    {
+        // 1. Balik nilainya (true menjadi false, false menjadi true)
+        $product->is_active = !$product->is_active;
+
+        // 2. Simpan perubahan ke database
+        $product->save();
+
+        // 3. Kembalikan data produk yang sudah diperbarui
+        return new ProductResource($product);
     }
 }

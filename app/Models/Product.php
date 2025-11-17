@@ -13,12 +13,14 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
 
+    /**
+     * $fillable yang baru.
+     * price, stock, dan size telah DIHAPUS.
+     */
     protected $fillable = [
         'category_id',
         'name',
         'description',
-        'price',
-        'stock',
         'image_url',
         'is_active',
     ];
@@ -31,5 +33,14 @@ class Product extends Model
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class, 'product_id', 'id');
+    }
+
+    /**
+     * RELASI BARU
+     * Mendefinisikan bahwa satu Produk memiliki BANYAK Varian.
+     */
+    public function variants(): HasMany
+    {
+        return $this->hasMany(ProductVariant::class, 'product_id');
     }
 }

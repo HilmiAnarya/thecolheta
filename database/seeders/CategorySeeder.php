@@ -33,6 +33,11 @@ class CategorySeeder extends Seeder
             'description' => 'Aneka kue kering dan cookies renyah.'
         ]);
 
+        $addon = Category::create([
+            'name' => 'Add On',
+            'description' => 'Tambahan opsional'
+        ]);
+
         // Subkategori di bawah Cakes
         Category::insert([
             [
